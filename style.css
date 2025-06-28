@@ -152,6 +152,7 @@ footer {
   margin-top: 0.4em;
   font-family: monospace;
 }
+.hidden { display: none !important; }
 @media (max-width: 900px) {
   .controls { display: none; }
   .fft-container { width: 98vw; height: 54vh; }
