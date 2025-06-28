@@ -15,10 +15,104 @@
         <span class="live-indicator">LIVE</span>
       </header>
       <div class="main-content">
+        <!-- Controls Sidebar -->
         <aside class="controls">
-          <!-- Frequency, Volume, Waveform, Presets, Harmonics, Experiment, Snapshots, Power, etc. -->
-          <!-- (The controls markup from your original file goes here, unchanged for brevity) -->
+          <!-- Frequency -->
+          <div class="control-group">
+            <label for="freqInput" class="ctrl-label">Frequency</label>
+            <div class="ctrl-row">
+              <input id="freqInput" class="freq-input" type="number" min="100" max="40000" step="1" value="20000" />
+              <input id="frequencySlider" type="range" min="100" max="40000" value="20000" step="1" class="ctrl-slider" />
+            </div>
+            <div class="ctrl-labels">
+              <span>100 Hz</span>
+              <span id="freqLabel" class="ctrl-highlight">20000 Hz</span>
+              <span>40,000 Hz</span>
+            </div>
+          </div>
+          <!-- Waveform -->
+          <div class="control-group">
+            <label for="waveformSelect" class="ctrl-label">Waveform</label>
+            <select id="waveformSelect" class="ctrl-select">
+              <option value="sine">Sine</option>
+              <option value="square">Square</option>
+              <option value="sawtooth">Sawtooth</option>
+              <option value="triangle">Triangle</option>
+            </select>
+          </div>
+          <!-- Presets -->
+          <div class="control-group ctrl-wrap">
+            <button class="preset-btn" id="presetPulse">Pulse</button>
+            <input id="pulseInterval" type="number" value="0.5" min="0.05" max="10" step="0.05" class="ctrl-small" title="Pulse interval (s)" />
+            <button class="preset-btn" id="presetByeFly">Bye-Fly!</button>
+            <button class="preset-btn" id="presetBatSonar">Bat Sonar</button>
+            <button class="preset-btn" id="presetDogWhistle">Dog Whistle</button>
+            <button class="preset-btn" id="presetScience">Science!</button>
+            <button class="preset-btn" id="presetStop">Stop</button>
+          </div>
+          <!-- Volume -->
+          <div class="control-group">
+            <label for="gainSlider" class="ctrl-label">Volume</label>
+            <input id="gainSlider" type="range" min="0" max="1" value="0.5" step="0.01" class="ctrl-slider" />
+            <div class="ctrl-labels">
+              <span>0</span>
+              <span id="gainLabel" class="ctrl-highlight">0.50</span>
+              <span>1</span>
+            </div>
+          </div>
+          <!-- Harmonics -->
+          <div class="control-group">
+            <label class="ctrl-checkbox">
+              <input id="harmonicsCheck" type="checkbox" />
+              <span>Add Harmonics</span>
+            </label>
+          </div>
+          <!-- Audify -->
+          <div class="control-group">
+            <label class="ctrl-checkbox">
+              <input id="audifyCheck" type="checkbox" />
+              <span>Audify (frequency shift)</span>
+            </label>
+          </div>
+          <!-- Audify Reference -->
+          <div class="control-group" id="audifyRefContainer">
+            <label class="ctrl-label">
+              Audify Reference <span id="audifyRefLabel" class="ctrl-highlight">18000</span> Hz
+            </label>
+            <input id="audifyRefSlider" type="range" min="8000" max="20000" value="18000" step="1" class="ctrl-slider" />
+            <div class="ctrl-labels">
+              <span>8 kHz</span>
+              <span>20 kHz</span>
+            </div>
+          </div>
+          <!-- Sim/Real Toggles -->
+          <div class="control-group sim-toggle">
+            <label class="ctrl-checkbox"><input type="checkbox" id="visualizeIntented" /> Visualize Intended Signal</label>
+            <label class="ctrl-checkbox"><input type="checkbox" id="hearIntented" /> Hear Intended Signal</label>
+            <span id="simNotice" class="ctrl-hint"></span>
+          </div>
+          <!-- Save/load experiments -->
+          <div class="control-group">
+            <input id="experimentName" type="text" placeholder="Experiment name" class="ctrl-input" />
+            <button class="snapshot-log-btn" id="saveExperimentBtn" title="Save current experiment set">Save Experiment</button>
+            <button class="snapshot-log-btn" id="exportExperimentsBtn" title="Export all experiments">Export Experiments</button>
+            <select id="experimentsSelect" class="ctrl-select">
+              <option value="">Load Experiment…</option>
+            </select>
+          </div>
+          <!-- Snapshots -->
+          <div class="control-group">
+            <button class="snapshot-log-btn" id="exportLogBtn" title="Export Snapshot Log">Export Snapshots</button>
+            <span class="ctrl-label">Snapshots: <span id="snapCount">0</span></span>
+            <div class="snapshot-log-area" id="snapshotLogArea" style="display:none"></div>
+          </div>
+          <!-- Power -->
+          <div class="control-group">
+            <button id="powerBtn" class="ctrl-power">Power ON</button>
+            <span id="status" class="ctrl-highlight">OFF</span>
+          </div>
         </aside>
+        <!-- Spectrum/FFT Area -->
         <section class="spectrum-area">
           <div class="fft-container" id="fftContainer">
             <button id="toggle3DViewBtn" class="fft-toggle-btn" title="Toggle 2D/3D rotate mode">3D</button>
@@ -29,7 +123,9 @@
             </div>
             <div id="snapshotModal" class="modal" style="display:none"></div>
           </div>
-          <div id="fft-label" class="fft3d-label"></div>
+          <div id="fft-label" class="fft3d-label">
+            Log FFT | X: freq, Y: amplitude. Click spectrum to take a visual snapshot.
+          </div>
         </section>
       </div>
       <footer>
