@@ -1,8 +1,9 @@
-// DOM Elements
+// === Audifier Main JS ===
+
+// ----- Audify Reference Visibility (PR Fix) -----
 const audifyCheck = document.getElementById('audifyCheck');
 const audifyRefContainer = document.getElementById('audifyRefContainer');
 
-// Show/hide Audify Reference slider based on checkbox state
 function updateAudifyRefVisibility() {
   if (audifyCheck.checked) {
     audifyRefContainer.classList.remove('hidden');
@@ -10,14 +11,10 @@ function updateAudifyRefVisibility() {
     audifyRefContainer.classList.add('hidden');
   }
 }
-// Hide on load unless checked
 updateAudifyRefVisibility();
 audifyCheck.addEventListener('input', updateAudifyRefVisibility);
 
-// === Everything else below is your original functionality ===
-
-// ... assign all other DOM elements (sliders, buttons, etc.) and continue your logic ...
-// Example: (add this after the above block)
+// ----- DOM Elements -----
 const freqSlider = document.getElementById('frequencySlider');
 const freqInput = document.getElementById('freqInput');
 const freqLabel = document.getElementById('freqLabel');
@@ -55,5 +52,13 @@ const simNotice = document.getElementById('simNotice');
 const joystick = document.getElementById('joystick');
 const joystickInner = document.getElementById('joystickInner');
 
-// ... rest of your code (FFT, audio, UI, experiment, snapshot logic) ...
-// (No functionality removed! Only improved visibility for Audify Reference.)
+// ---- Rest of original functionality below ----
+// You should paste or keep all your original signal generation, UI logic, 
+// FFT visualization, experiment manager, and snapshot code below this section.
+// No features removed! Only Audify Reference visibility is improved above.
+
+// Example: if you had
+// function powerOn() { ... }
+// function drawSpectrum() { ... }
+// etc.
+// Those remain unchanged and go below this comment.
